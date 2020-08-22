@@ -17,6 +17,8 @@ public class WCameraPositioning : MonoBehaviour
     public Transform sourceBody;
     public Transform destinationTransform;
 
+    Matrix4x4 relativeProjectionMatrix;
+
     public void Init(Camera mainCamera, Camera localCamera, Camera linkedCamera, Transform linkedWormholeTransform, Transform destinationTransform)
     {
         this.sourceBody = linkedWormholeTransform;
@@ -26,7 +28,7 @@ public class WCameraPositioning : MonoBehaviour
         this.destinationTransform = destinationTransform;
     }
 
-    void FixedUpdate() {
+    public void Reposition() {
 
         MatrixRelativeTransform();
         //SetCameraRelativePosition();
@@ -38,9 +40,9 @@ public class WCameraPositioning : MonoBehaviour
     //
     public void MatrixRelativeTransform()
     {
-        Matrix4x4 relativeProjectionMatrix = destinationTransform.transform.localToWorldMatrix * transform.worldToLocalMatrix * mainCamera.transform.localToWorldMatrix;
+        relativeProjectionMatrix = destinationTransform.transform.localToWorldMatrix * transform.worldToLocalMatrix * mainCamera.transform.localToWorldMatrix;
         destinationCamera.transform.SetPositionAndRotation(relativeProjectionMatrix.GetColumn(3), relativeProjectionMatrix.rotation);
-        Debug.Log(">> Relative position: " + relativeProjectionMatrix.GetColumn(3));
+        //Debug.Log(">> Relative position: " + relativeProjectionMatrix.GetColumn(3));
     }
 
     //NOTICE:

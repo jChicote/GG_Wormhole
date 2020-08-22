@@ -26,7 +26,7 @@ Shader "Custom/Wormhole"
             };
 
             sampler2D _MainTex;
-            int displayMask;
+            int Mask;
 
 
             //VERTEX SHADER
@@ -44,7 +44,7 @@ Shader "Custom/Wormhole"
             {
                 float2 uv = output.posFragment.xy / output.posFragment.w;
                 fixed4 portalCol = tex2D(_MainTex, uv);
-                return portalCol * displayMask;
+                return portalCol;
             }
             
             ENDCG

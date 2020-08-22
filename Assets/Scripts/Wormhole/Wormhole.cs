@@ -26,29 +26,14 @@ public class Wormhole : MonoBehaviour
         _wormholeRenderer.Init(localCamera, linkedWormhole.localCamera, wormholeBody);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
-        //CullWhenOutsideView();
+        _wormholeRenderer.Render();
+        _cameraTracker.Reposition();
     }
 
-    void CullWhenOutsideView()
+    private bool CheckWhenInCameraView()
     {
-        Vector3 forward = mainCamera.transform.TransformDirection(Vector3.forward);
-        Vector3 dirToWormhole = transform.position - mainCamera.transform.position;
-
-        if (Vector3.Dot(forward, dirToWormhole) > 0f)
-        {
-            wormholeBody.material.SetInt("displayMask", 1);
-        } else
-        {
-            wormholeBody.material.SetInt("displayMask", 0);
-        }
+        return true;
     }
-
 }

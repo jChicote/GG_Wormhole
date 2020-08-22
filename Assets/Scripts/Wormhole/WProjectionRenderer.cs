@@ -16,41 +16,26 @@ public class WProjectionRenderer : MonoBehaviour
     private Camera _destinationCamera;
     private MeshRenderer _sourceWormholeMesh;
 
-    private Wormhole _destinationWormhole;
+    private Wormhole _linkedWormhole;
 
     public void Init(Camera sourceCamera, Camera destinationCamera, MeshRenderer sourceWormholeMesh)
     {
         this._destinationCamera = destinationCamera;
         this._sourceWormholeMesh = sourceWormholeMesh;
         this._sourceCamera = sourceCamera;
-        _destinationWormhole = this.GetComponent<Wormhole>().linkedWormhole;
+        _linkedWormhole = this.GetComponent<Wormhole>().linkedWormhole;
         _sourceWormholeMesh.material.SetInt("displayMask", 1);
-        Start();
+
+        _destinationCamera.enabled = false;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Render()
     {
-        //RenderProjection();
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        Render();
-    }
-
-    void Render()
-    {
-        //_sourceWormholeMesh.enabled = false;
-
         CreateRenderTexture();
 
-        _destinationWormhole.wormholeBody.material.SetInt("displayMask", 0);
-        _sourceCamera.Render();
-        _destinationWormhole.wormholeBody.material.SetInt("displayMask", 1);
-
-        //_sourceWormholeMesh.enabled = true;
+        _linkedWormhole.wormholeBody.enabled = false;
+        _destinationCamera.Render();
+        _linkedWormhole.wormholeBody.enabled = true;
     }
 
     void CreateRenderTexture()

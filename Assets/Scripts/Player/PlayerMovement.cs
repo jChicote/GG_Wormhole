@@ -19,6 +19,12 @@ public class PlayerMovement : MonoBehaviour
     private float _pitch = 0;
     private float _yaw = 0;
 
+    Vector3 forwardForce;
+    Vector3 rightForce;
+
+    Vector3 playerYaw;
+    Vector3 cameraPitch;
+
     void Awake()
     {
         mainCamera = this.GetComponentInChildren<Camera>();
@@ -40,8 +46,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Vector3 forwardForce = transform.forward * _inputY * movementSpeed * Time.fixedDeltaTime;
-            Vector3 rightForce = transform.right * _inputX * movementSpeed * Time.fixedDeltaTime;
+            forwardForce = transform.forward * _inputY * movementSpeed * Time.fixedDeltaTime;
+            rightForce = transform.right * _inputX * movementSpeed * Time.fixedDeltaTime;
 
             _movementVect = forwardForce + rightForce;
         }
@@ -54,8 +60,8 @@ public class PlayerMovement : MonoBehaviour
         if (_pitch == 0 && _yaw == 0) return;
 
         //_rotationVect = Vector3.zero;
-        Vector3 playerYaw = new Vector3(0, _yaw, 0);
-        Vector3 cameraPitch = new Vector3(-1 * _pitch, 0, 0);
+        playerYaw = new Vector3(0, _yaw, 0);
+        cameraPitch = new Vector3(-1 * _pitch, 0, 0);
         mainCamera.transform.Rotate(cameraPitch);
         transform.Rotate(playerYaw);
     }
