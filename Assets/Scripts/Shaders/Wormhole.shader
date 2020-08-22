@@ -1,10 +1,15 @@
-﻿Shader "Custom/Wormhole"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/Wormhole"
 {
     SubShader
     {
+        Tags { "RenderType"="Opaque" }
+        LOD 100
+        Cull Off
+
         Pass {
             CGPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc" //Built-in include files for declaring helper func and data struct.
@@ -16,27 +21,35 @@
 
             struct vertOutput
             {
-                float4 vertex : SV_POSITION;
-                float4 screenPos : TEXCOORD0;
+                float4 pos : SV_POSITION;
+                float4 posFragment : TEXCOORD0;
             };
 
             sampler2D _MainTex;
+            int displayMask;
 
 
-            vertOutput vert(vertInput input)
+            //VERTEX SHADER
+            vertOutput vert(vertInput v)
             {
                 vertOutput o;
-                o.vertex = UnityObjectToClipPos(input.pos);
-                o.screenPos = ComputeScreenPos(o.vertex);
+                o.pos = UnityObjectToClipPos(v.pos);
+                o.posFragment = ComputeScreenPos(o.pos);
                 return o;
             }
 
-            //Renders frag to pixel
-            half4 frag(vertOutput output) : COLOR {
-                return half4(1.0, 0.0, 0.0, 1.0); 
+
+            //FRAG SHADER
+            fixed4 frag(vertOutput output) : SV_TARGET
+            {
+                float2 uv = output.posFragment.xy / output.posFragment.w;
+                fixed4 portalCol = tex2D(_MainTex, uv);
+                return portalCol * displayMask;
             }
             
             ENDCG
         }
     }
+
+    Fallback "Standard"
 }

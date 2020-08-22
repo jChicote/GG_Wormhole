@@ -11,14 +11,19 @@ using UnityEngine;
 public class WCameraPositioning : MonoBehaviour
 {
     public Camera mainCamera;
+    public Camera sourceCamera;
     public Camera destinationCamera;
-    public Transform destination;
 
-    public void Init(Camera mainCamera, Camera linkedCamera, Transform linkedWormholeTransform)
+    public Transform sourceBody;
+    public Transform destinationTransform;
+
+    public void Init(Camera mainCamera, Camera localCamera, Camera linkedCamera, Transform linkedWormholeTransform, Transform destinationTransform)
     {
-        this.destination = linkedWormholeTransform;
+        this.sourceBody = linkedWormholeTransform;
         this.mainCamera = mainCamera;
+        this.sourceCamera = localCamera;
         this.destinationCamera = linkedCamera;
+        this.destinationTransform = destinationTransform;
     }
 
     void FixedUpdate() {
@@ -33,24 +38,31 @@ public class WCameraPositioning : MonoBehaviour
     //
     public void MatrixRelativeTransform()
     {
-        Matrix4x4 relativeProjectionMatrix = destination.transform.localToWorldMatrix * transform.worldToLocalMatrix * mainCamera.transform.localToWorldMatrix;
+        Matrix4x4 relativeProjectionMatrix = destinationTransform.transform.localToWorldMatrix * transform.worldToLocalMatrix * mainCamera.transform.localToWorldMatrix;
         destinationCamera.transform.SetPositionAndRotation(relativeProjectionMatrix.GetColumn(3), relativeProjectionMatrix.rotation);
         Debug.Log(">> Relative position: " + relativeProjectionMatrix.GetColumn(3));
     }
 
+    //NOTICE:
+    /*
+     * 
+     * Transform point calculation won't be used in final ver but do
+     * address the understanding of the logic associated with camera 
+     * positioning.
+     */
 
     //Summary: the transform point equivalent of the matrix version.
     //
     public void SetCameraRelativePosition() {
         Vector3 relativePos = transform.InverseTransformPoint(mainCamera.transform.position);
-        destinationCamera.transform.position = destination.TransformPoint(relativePos);
+        destinationCamera.transform.position = destinationTransform.TransformPoint(relativePos);
     }
 
     //Summary: the transform rotation equivalent of the matrix version.
     //
     public void SetCameraRelativeRotation() {
         Quaternion relativeRot = Quaternion.Inverse(transform.rotation) * mainCamera.transform.rotation;
-        destinationCamera.transform.rotation = destination.rotation * relativeRot;
+        destinationCamera.transform.rotation = sourceBody.rotation * relativeRot;
     }
 
     //Draws the camera relative position to parent
@@ -58,6 +70,6 @@ public class WCameraPositioning : MonoBehaviour
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(destinationCamera.transform.position, 0.5f);
+        Gizmos.DrawSphere(sourceCamera.transform.position, 0.5f);
     }
 }
