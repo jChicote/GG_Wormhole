@@ -65,7 +65,7 @@
             //FRAGMENT SHADER: Renders the shader's fragment to the screen.
             half4 frag (vertOutput i) : SV_Target
             {
-                float2 texUV = i.fragment.xy / i.fragment.w; //This is the incoming texture coordinates
+                float2 texUV = i.fragment.xy ; //This is the incoming texture coordinates
 
                 //float x = TAU * (texUV.x - 0.5);
                 //float y = TAU * (texUV.y - 0.5);
