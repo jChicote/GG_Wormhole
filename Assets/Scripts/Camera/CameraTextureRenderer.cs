@@ -9,6 +9,7 @@ public class CameraTextureRenderer : MonoBehaviour
     public RenderTexture renderTexture;
     public Shader wormholeShader;
     public MeshRenderer meshRenderer;
+    public WormholeRenderer wormholeRenderer;
 
     public Camera mainCam;
 
@@ -29,6 +30,12 @@ public class CameraTextureRenderer : MonoBehaviour
 
     private bool isViewable = false;
 
+    private void Awake()
+    {
+        wormholeRenderer = targetWormhole.GetComponent<WormholeRenderer>();
+        wormholeRenderer.Init(mainCam, targetWormhole, lensingMaterial);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,10 +44,12 @@ public class CameraTextureRenderer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Vector4 wormholePosition = new Vector4(targetWormhole.position.x, targetWormhole.position.y, targetWormhole.position.z, 0);
         //lensingMaterial.SetVector("_Position", new Vector4(0,0,0,0));
+        wormholeRenderer.SetProjectionLongitude();
+        wormholeRenderer.SetProjectionLatitude();
 
         CheckInForwardDirection();
 
@@ -56,6 +65,8 @@ public class CameraTextureRenderer : MonoBehaviour
 
         FindDistance();
         lensingMaterial.SetFloat("_Distance", wormholeDistance);
+
+        transform.LookAt(targetWormhole);
     }
 
     void FindIn2D()
@@ -85,8 +96,8 @@ public class CameraTextureRenderer : MonoBehaviour
         Vector3 wormholeDir = (targetWormhole.position - mainCam.transform.position).normalized;
         Vector3 cameraForward = mainCam.transform.forward.normalized;
 
-        Debug.Log(">> Bool value: " + lensingMaterial.GetFloat("_IsViewable"));
-        Debug.Log(">> Dot Product: " + Vector3.Dot(cameraForward, wormholeDir));
+        //Debug.Log(">> Bool value: " + lensingMaterial.GetFloat("_IsViewable"));
+        //Debug.Log(">> Dot Product: " + Vector3.Dot(cameraForward, wormholeDir));
 
         if (Vector3.Dot(cameraForward, wormholeDir) > 0.3f)
         {
