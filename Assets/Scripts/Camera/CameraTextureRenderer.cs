@@ -46,27 +46,13 @@ public class CameraTextureRenderer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Vector4 wormholePosition = new Vector4(targetWormhole.position.x, targetWormhole.position.y, targetWormhole.position.z, 0);
-        //lensingMaterial.SetVector("_Position", new Vector4(0,0,0,0));
-        wormholeRenderer.SetProjectionLongitude();
-        wormholeRenderer.SetProjectionLatitude();
-
         CheckInForwardDirection();
-
-        //Debug.Log(lensingMaterial.GetFloat("_Ratio"));
-
-        //modifying shader
-        lensingMaterial.SetFloat("_Ratio", ratio);
-
-        //testInstance.SetFloat("_Ratio", ratio);
-        //Debug.Log(testInstance.GetFloat("_Ratio"));
         FindIn2D();
-        lensingMaterial.SetVector("_Position", wormholePosVect);
-
         FindDistance();
-        lensingMaterial.SetFloat("_Distance", wormholeDistance);
 
-        transform.LookAt(targetWormhole);
+        wormholeRenderer.RenderWormhole(wormholeDistance, screenPos);
+
+        //transform.LookAt(targetWormhole);
     }
 
     void FindIn2D()

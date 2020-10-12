@@ -24,6 +24,7 @@ public class MovementController : MonoBehaviour
     void FixedUpdate()
     {
         ApplyMovement();
+        //SetProjectionLatitude();
     }
 
     private void ApplyMovement()
@@ -37,7 +38,6 @@ public class MovementController : MonoBehaviour
     {
         forwardSpeed = value.Get<Vector2>().y;
         yawSpeed = value.Get<Vector2>().x;
-
     }
 
     private void OnElevation(InputValue value)

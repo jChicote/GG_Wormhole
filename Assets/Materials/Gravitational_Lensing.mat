@@ -75,15 +75,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_1F4E1F47: 0.55
+    - Vector1_686F2012: 1.45
     - Vector1_874E47F4: 5
     - Vector1_BCF6DAE2: 0.4
-    - Vector1_F6687C38: 2.05
+    - Vector1_F6687C38: 2
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Distance: 11.189802
+    - _Distance: 21.999369
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -91,7 +92,8 @@ Material:
     - _GlossyReflections: 0
     - _IsViewable: 1
     - _Latitude: -0
-    - _Longitude: -2.9717798
+    - _LensingRadius: 2.35
+    - _Longitude: -3.0300672
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _PI: 3.141593
@@ -105,6 +107,7 @@ Material:
     - _Surface: 0
     - _TAU: 6.283185
     - _WorkflowMode: 1
+    - _WormholeRadius: 2
     - _ZWrite: 1
     m_Colors:
     - Vector2_B6C8B104: {r: 0.7, g: 0.51, b: 0, a: 0}
@@ -112,6 +115,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Position: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Position: {r: 0.45024797, g: 0.5, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TilingScale: {r: 2, g: 1.1, b: 0, a: 0}
+    - _WorldSpacePosition: {r: 0, g: 0, b: 0, a: 0}

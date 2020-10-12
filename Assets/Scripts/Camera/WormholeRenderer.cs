@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class WormholeRenderer : MonoBehaviour
 {
+    [Header("Azimuthal Position")]
     public float maxTurnAngle = 3.6f;
     public float maxLatitude = 1.8f;
+
+    [Header("Wormhole Attributes")]
+    public float lensingRadius;
+    public float wormholeRadius;
+    public float aspectRatio = 0.5f;
+
+    //[Header("Switches")]
+    //public bool isModifiable;
 
     private Camera mainCamera;
     private Transform wormholeTransform;
@@ -27,6 +36,22 @@ public class WormholeRenderer : MonoBehaviour
         this.mainCamera = camera;
         this.wormholeMaterial = material;
         this.wormholeTransform = wormholeTransform;
+    }
+
+    public void RenderWormhole(float distanceToCam, Vector2 screenPosition)
+    {
+        ApplyAttributes(distanceToCam, screenPosition);
+        SetProjectionLongitude();
+        SetProjectionLatitude();
+    }
+
+    public void ApplyAttributes(float distanceToCam, Vector2 screenPosition)
+    {
+        wormholeMaterial.SetFloat("_Ratio", aspectRatio);
+        wormholeMaterial.SetVector("_Position", screenPosition);
+        wormholeMaterial.SetFloat("_Distance", distanceToCam);
+        wormholeMaterial.SetFloat("_LensingRadius", lensingRadius);
+        wormholeMaterial.SetFloat("_WormholeRadius", wormholeRadius);
     }
 
     // 3.6 is the max
@@ -68,8 +93,7 @@ public class WormholeRenderer : MonoBehaviour
         float distance = Vector3.Distance(wormholePosition, cameraPosition);
 
         elevationAngle = Mathf.Acos(Vector2.Distance(Vector2.zero, relativePos)/ distance) * negPosValue;
-        Debug.Log(">> Latitude at: " + elevationAngle);
-
+        //Debug.Log(">> Latitude at: " + elevationAngle);
         //elevationAngle = Mathf.Atan(relativeCylindricalPos.y / relativeCylindricalPos.x);
         latitudeValue = (elevationAngle * Mathf.Rad2Deg / 100) * maxLatitude;
 
@@ -78,6 +102,6 @@ public class WormholeRenderer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(transform.position, 1);
+        Gizmos.DrawSphere(transform.position, wormholeRadius);
     }
 }
