@@ -52,7 +52,7 @@ public class CameraTextureRenderer : MonoBehaviour
 
         wormholeRenderer.RenderWormhole(wormholeDistance, screenPos);
 
-        //transform.LookAt(targetWormhole);
+        transform.LookAt(targetWormhole);
     }
 
     void FindIn2D()
