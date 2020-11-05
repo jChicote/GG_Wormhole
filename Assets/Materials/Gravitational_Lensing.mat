@@ -88,16 +88,16 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Distance: 5.0252905
+    - _Distance: 13.439335
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _IsViewable: 1
-    - _Latitude: 0.04234382
+    - _Latitude: -0
     - _LensingRadius: 2.35
-    - _Longitude: 0.66168225
+    - _Longitude: -2.9200213
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _PI: 3.141593
@@ -119,7 +119,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Position: {r: 0.49999994, g: 0.5, b: 0, a: 0}
+    - _Position: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TilingScale: {r: 2, g: 1.1, b: 0, a: 0}
     - _WorldSpacePosition: {r: 0, g: 0, b: 0, a: 0}

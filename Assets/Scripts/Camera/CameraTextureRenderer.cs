@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class CameraTextureRenderer : MonoBehaviour
 {
     public Material lensingMaterial;
-    public RenderTexture renderTexture;
-    public Shader wormholeShader;
-    public MeshRenderer meshRenderer;
+    //public RenderTexture renderTexture;
+    //public Shader wormholeShader;
+    //public MeshRenderer meshRenderer;
     public WormholeRenderer wormholeRenderer;
 
     public Camera mainCam;
@@ -36,12 +36,6 @@ public class CameraTextureRenderer : MonoBehaviour
         wormholeRenderer.Init(mainCam, targetWormhole, lensingMaterial);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //wormholeShader = lensingMaterial.shader;
-        //testInstance = meshRenderer.material;
-    }
 
     // Update is called once per frame
     void FixedUpdate()

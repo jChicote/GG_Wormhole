@@ -16,7 +16,6 @@ public class WormholeRenderer : MonoBehaviour
     [Header("Azimuthal Camera Projection")]
     public Camera azimuthalCamera;
     public RenderTexture azimuthalRenderEquirect;
-    //public RenderTexture cameraCubemapProjection;
     private RenderTexture cameraCubemap;
 
     [Header("Wormhole Attributes")]
@@ -74,12 +73,14 @@ public class WormholeRenderer : MonoBehaviour
     private void FixedUpdate()
     {
         CheckIsInView();
-    }
-
-    private void OnRenderImage()
-    {
         SetEquirectangularCameraTexture();
     }
+
+    //Deprecated as OnRenderImage throws error, resorted to FixedUpdate instead
+    /*private void OnRenderImage()
+    {
+        SetEquirectangularCameraTexture();
+    }*/
 
     /// <summary>
     /// Calculates the dot product from the wormhole to the camera
@@ -108,9 +109,9 @@ public class WormholeRenderer : MonoBehaviour
         cameraCubemap.ConvertToEquirect(azimuthalRenderEquirect, Camera.MonoOrStereoscopicEye.Mono);
     }
 
+    //Summary: This sets the longitude of the projection
     // 3.6 is the max
     // 0 is the min
-
     public void SetProjectionLongitude()
     {
         wormholePosition = wormholeTransform.position;
@@ -126,9 +127,9 @@ public class WormholeRenderer : MonoBehaviour
         wormholeMaterial.SetFloat("_Longitude", longitudeValue);
     }
 
+    // Summary: This sets the latitude of the projection
     // 3.6 is the max
     // 0 is the min
-
     public void SetProjectionLatitude()
     {
         wormholePosition = wormholeTransform.position;
