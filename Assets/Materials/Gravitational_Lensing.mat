@@ -88,7 +88,7 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Distance: 13.439335
+    - _Distance: 0.99814916
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -97,7 +97,7 @@ Material:
     - _IsViewable: 1
     - _Latitude: -0
     - _LensingRadius: 2.35
-    - _Longitude: -2.9200213
+    - _Longitude: -1.4840473
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _PI: 3.141593
