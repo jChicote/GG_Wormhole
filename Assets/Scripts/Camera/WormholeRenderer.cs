@@ -77,10 +77,10 @@ public class WormholeRenderer : MonoBehaviour
     }
 
     //Deprecated as OnRenderImage throws error, resorted to FixedUpdate instead
-    /*private void OnRenderImage()
+    private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        SetEquirectangularCameraTexture();
-    }*/
+        //SetEquirectangularCameraTexture();
+    }
 
     /// <summary>
     /// Calculates the dot product from the wormhole to the camera
